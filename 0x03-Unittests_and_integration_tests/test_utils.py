@@ -44,9 +44,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(
-            self,
-            test_url: str,
-            test_payload: Dict,
+            self, test_url: str, test_payload: Dict,
             ) -> None:
         """`get_json`'s output test."""
         attrs = {'json.return_value': test_payload}
