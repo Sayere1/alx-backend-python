@@ -56,9 +56,12 @@ class TestGithubOrgClient(unittest.TestCase):
             'repos_url': "https://api.github.com/users/google/repos",
             'repos': [
                 {
-                    "id": 7697149, "name": "episodes.dart", "private": False,
+                    "id": 7697149,
+                    "name": "episodes.dart",
+                    "private": False,
                     "owner": {
-                        "login": "google","id": 1342004,
+                        "login": "google",
+                        "id": 1342004,
                     },
                     "fork": False,
                     "url": "https://api.github.com/repos/google/episodes.dart",
@@ -106,7 +109,11 @@ class TestGithubOrgClient(unittest.TestCase):
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
         ({'license': {'key': "bsl-1.0"}}, "bsd-3-clause", False),
     ])
-    def test_has_license(self, repo: Dict, key: str, expected: bool) -> None:
+    def test_has_license(
+            self, repo: Dict,
+            key: str,
+            expected: bool
+            ) -> None:
         """Tests the `has_license` method."""
         gh_org_client = GithubOrgClient("google")
         client_has_licence = gh_org_client.has_license(repo, key)
