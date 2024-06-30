@@ -21,10 +21,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
     def test_access_nested_map(
-            self,
-            nested_map: Dict,
-            path: Tuple[str],
-            expected: Union[Dict, int],
+            self, nested_map: Dict, path: Tuple[str], expected: Union[Dict, int],
             ) -> None:
         """Tests `access_nested_map`'s output."""
         self.assertEqual(access_nested_map(nested_map, path), expected)
@@ -34,10 +31,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), KeyError),
     ])
     def test_access_nested_map_exception(
-            self,
-            nested_map: Dict,
-            path: Tuple[str],
-            exception: Exception,
+            self, nested_map: Dict, path: Tuple[str], exception: Exception,
             ) -> None:
         """Tests `access_nested_map`'s exception raising."""
         with self.assertRaises(exception):
@@ -51,9 +45,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(
-            self,
-            test_url: str,
-            test_payload: Dict,
+            self, test_url: str, test_payload: Dict,
             ) -> None:
         """Tests `get_json`'s output."""
         attrs = {'json.return_value': test_payload}
