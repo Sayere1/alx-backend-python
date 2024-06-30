@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""A module for testing the utils module.
-"""
+"""model to Parameterize a unit test, mock up call and patch"""
 import unittest
 from typing import Dict, Tuple, Union
 from unittest.mock import patch, Mock
@@ -14,7 +13,7 @@ from utils import (
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """Tests the `access_nested_map` function."""
+    """`access_nested_map` function test."""
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
@@ -23,7 +22,7 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map(
             self, nested_map: Dict, path: Tuple[str], expected: Union[Dict, int],
             ) -> None:
-        """Tests `access_nested_map`'s output."""
+        """`access_nested_map`'s output test."""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -33,21 +32,23 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map_exception(
             self, nested_map: Dict, path: Tuple[str], exception: Exception,
             ) -> None:
-        """Tests `access_nested_map`'s exception raising."""
+        """`access_nested_map`'s exception test."""
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
 
 
 class TestGetJson(unittest.TestCase):
-    """Tests the `get_json` function."""
+    """the `get_json` test."""
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(
-            self, test_url: str, test_payload: Dict,
+            self,
+            test_url: str,
+            test_payload: Dict,
             ) -> None:
-        """Tests `get_json`'s output."""
+        """`get_json`'s output test."""
         attrs = {'json.return_value': test_payload}
         with patch("requests.get", return_value=Mock(**attrs)) as req_get:
             self.assertEqual(get_json(test_url), test_payload)
