@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""A module for testing the client module.
-"""
+"""model for mock property, patching & decorators, fixture and integration"""
 import unittest
 from typing import Dict
 from unittest.mock import (
@@ -19,7 +18,7 @@ from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """Tests the `GithubOrgClient` class."""
+    """the `GithubOrgClient` class test."""
     @parameterized.expand([
         ("google", {'login': "google"}),
         ("abc", {'login': "abc"}),
@@ -28,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
         "client.get_json",
     )
     def test_org(self, org: str, resp: Dict, mocked_fxn: MagicMock) -> None:
-        """Tests the `org` method."""
+        """the `org` method test."""
         mocked_fxn.return_value = MagicMock(return_value=resp)
         gh_org_client = GithubOrgClient(org)
         self.assertEqual(gh_org_client.org(), resp)
@@ -37,7 +36,7 @@ class TestGithubOrgClient(unittest.TestCase):
         )
 
     def test_public_repos_url(self) -> None:
-        """Tests the `_public_repos_url` property."""
+        """the `_public_repos_url` property test."""
         with patch(
                 "client.GithubOrgClient.org",
                 new_callable=PropertyMock,
@@ -57,12 +56,9 @@ class TestGithubOrgClient(unittest.TestCase):
             'repos_url': "https://api.github.com/users/google/repos",
             'repos': [
                 {
-                    "id": 7697149,
-                    "name": "episodes.dart",
-                    "private": False,
+                    "id": 7697149, "name": "episodes.dart", "private": False,
                     "owner": {
-                        "login": "google",
-                        "id": 1342004,
+                        "login": "google","id": 1342004,
                     },
                     "fork": False,
                     "url": "https://api.github.com/repos/google/episodes.dart",
