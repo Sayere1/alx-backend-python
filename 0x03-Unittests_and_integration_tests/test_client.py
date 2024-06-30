@@ -118,7 +118,8 @@ class TestGithubOrgClient(unittest.TestCase):
         ({'license': {'key': "bsl-1.0"}}, "bsd-3-clause", False),
     ])
     def test_has_license(
-            self, repo: Dict,
+            self,
+            repo: Dict,
             key: str,
             expected: bool
             ) -> None:
